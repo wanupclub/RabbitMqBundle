@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Tests\RabbitMq\Fixtures;
+namespace WanupSml\RabbitMqBundle\Tests\RabbitMq\Fixtures;
 
 class AMQPConnection
 {

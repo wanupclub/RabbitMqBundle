@@ -1,8 +1,8 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Tests\RabbitMq;
+namespace WanupSml\RabbitMqBundle\Tests\RabbitMq;
 
-use OldSound\RabbitMqBundle\RabbitMq\DynamicConsumer;
+use WanupSml\RabbitMqBundle\RabbitMq\DynamicConsumer;
 
 class DynamicConsumerTest extends ConsumerTest
 {   
@@ -18,7 +18,7 @@ class DynamicConsumerTest extends ConsumerTest
      */
     private function prepareQueueOptionsProvider()
     {
-        return $this->getMockBuilder('\OldSound\RabbitMqBundle\Provider\QueueOptionsProviderInterface')
+        return $this->getMockBuilder('\WanupSml\RabbitMqBundle\Provider\QueueOptionsProviderInterface')
             ->getMock();
     }
     

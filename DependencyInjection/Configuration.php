@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\DependencyInjection;
+namespace WanupSml\RabbitMqBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -17,7 +17,7 @@ class Configuration implements ConfigurationInterface
     {
         $tree = new TreeBuilder();
 
-        $rootNode = $tree->root('old_sound_rabbit_mq');
+        $rootNode = $tree->root('wanup_sml_rabbit_mq');
 
         $rootNode
             ->children()
@@ -85,7 +85,7 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->scalarNode('connection')->defaultValue('default')->end()
                             ->scalarNode('auto_setup_fabric')->defaultTrue()->end()
-                            ->scalarNode('class')->defaultValue('%old_sound_rabbit_mq.producer.class%')->end()
+                            ->scalarNode('class')->defaultValue('%wanup_sml_rabbit_mq.producer.class%')->end()
                         ->end()
                     ->end()
                 ->end()

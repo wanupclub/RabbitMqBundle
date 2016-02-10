@@ -1,12 +1,12 @@
 <?php
 
-namespace OldSound\RabbitMqBundle;
+namespace WanupSml\RabbitMqBundle;
 
-use OldSound\RabbitMqBundle\DependencyInjection\Compiler\RegisterPartsPass;
+use WanupSml\RabbitMqBundle\DependencyInjection\Compiler\RegisterPartsPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class OldSoundRabbitMqBundle extends Bundle
+class WanupSmlRabbitMqBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

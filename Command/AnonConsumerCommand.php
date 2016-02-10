@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Command;
+namespace WanupSml\RabbitMqBundle\Command;
 
 class AnonConsumerCommand extends BaseConsumerCommand
 {
@@ -18,6 +18,6 @@ class AnonConsumerCommand extends BaseConsumerCommand
 
     protected function getConsumerService()
     {
-        return 'old_sound_rabbit_mq.%s_anon';
+        return 'wanup_sml_rabbit_mq.%s_anon';
     }
 }

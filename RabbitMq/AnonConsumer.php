@@ -1,8 +1,8 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\RabbitMq;
+namespace WanupSml\RabbitMqBundle\RabbitMq;
 
-use OldSound\RabbitMqBundle\RabbitMq\Consumer;
+use WanupSml\RabbitMqBundle\RabbitMq\Consumer;
 use PhpAmqpLib\Connection\AMQPConnection;
 
 class AnonConsumer extends Consumer

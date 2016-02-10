@@ -8,9 +8,9 @@
  *
  * @author Tibor Barna <tibor.barna@wiredminds.de>
  */
-namespace OldSound\RabbitMqBundle\Command;
+namespace WanupSml\RabbitMqBundle\Command;
 
-use OldSound\RabbitMqBundle\Command\BaseConsumerCommand;
+use WanupSml\RabbitMqBundle\Command\BaseConsumerCommand;
 use Symfony\Component\Console\Input\InputArgument;
 
 class DynamicConsumerCommand extends BaseConsumerCommand
@@ -28,7 +28,7 @@ class DynamicConsumerCommand extends BaseConsumerCommand
 
     protected function getConsumerService()
     {
-        return 'old_sound_rabbit_mq.%s_dynamic';
+        return 'wanup_sml_rabbit_mq.%s_dynamic';
     }
     
     protected function initConsumer($input)

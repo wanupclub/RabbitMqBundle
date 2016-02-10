@@ -1,22 +1,22 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Tests\RabbitMq;
+namespace WanupSml\RabbitMqBundle\Tests\RabbitMq;
 
-use OldSound\RabbitMqBundle\RabbitMq\AMQPConnectionFactory;
-use OldSound\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection;
+use WanupSml\RabbitMqBundle\RabbitMq\AMQPConnectionFactory;
+use WanupSml\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection;
 
 class AMQPConnectionFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testDefaultValues()
     {
         $factory = new AMQPConnectionFactory(
-            'OldSound\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection',
+            'WanupSml\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection',
             array()
         );
 
         /** @var AMQPConnection $instance */
         $instance = $factory->createConnection();
-        $this->assertInstanceOf('OldSound\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection', $instance);
+        $this->assertInstanceOf('WanupSml\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection', $instance);
         $this->assertEquals(array(
             'localhost', // host
             5672,        // port
@@ -38,7 +38,7 @@ class AMQPConnectionFactoryTest extends \PHPUnit_Framework_TestCase
     public function testStandardConnectionParameters()
     {
         $factory = new AMQPConnectionFactory(
-            'OldSound\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection',
+            'WanupSml\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection',
             array(
                 'host' => 'foo_host',
                 'port' => 123,
@@ -50,7 +50,7 @@ class AMQPConnectionFactoryTest extends \PHPUnit_Framework_TestCase
 
         /** @var AMQPConnection $instance */
         $instance = $factory->createConnection();
-        $this->assertInstanceOf('OldSound\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection', $instance);
+        $this->assertInstanceOf('WanupSml\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection', $instance);
         $this->assertEquals(array(
             'foo_host',  // host
             123,         // port
@@ -72,7 +72,7 @@ class AMQPConnectionFactoryTest extends \PHPUnit_Framework_TestCase
     public function testSSLConnectionParameters()
     {
         $factory = new AMQPConnectionFactory(
-            'OldSound\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection',
+            'WanupSml\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection',
             array(
                 'host' => 'ssl_host',
                 'port' => 123,
@@ -87,7 +87,7 @@ class AMQPConnectionFactoryTest extends \PHPUnit_Framework_TestCase
 
         /** @var AMQPConnection $instance */
         $instance = $factory->createConnection();
-        $this->assertInstanceOf('OldSound\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection', $instance);
+        $this->assertInstanceOf('WanupSml\RabbitMqBundle\Tests\RabbitMq\Fixtures\AMQPConnection', $instance);
         $this->assertArrayHasKey(11, $instance->constructParams);
         $context = $instance->constructParams[11];
         // unset to check whole array at once later

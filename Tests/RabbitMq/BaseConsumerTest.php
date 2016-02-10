@@ -1,8 +1,8 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Tests\RabbitMq;
+namespace WanupSml\RabbitMqBundle\Tests\RabbitMq;
 
-use OldSound\RabbitMqBundle\RabbitMq\BaseConsumer;
+use WanupSml\RabbitMqBundle\RabbitMq\BaseConsumer;
 
 class BaseConsumerTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,19 +15,19 @@ class BaseConsumerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->consumer = $this->getMockBuilder('\OldSound\RabbitMqBundle\RabbitMq\BaseConsumer')
+        $this->consumer = $this->getMockBuilder('\WanupSml\RabbitMqBundle\RabbitMq\BaseConsumer')
             ->setConstructorArgs(array($amqpConnection))
             ->getMockForAbstractClass();
     }
 
     public function testItExtendsBaseAmqpInterface()
     {
-        $this->assertInstanceOf('OldSound\RabbitMqBundle\RabbitMq\BaseAmqp', $this->consumer);
+        $this->assertInstanceOf('WanupSml\RabbitMqBundle\RabbitMq\BaseAmqp', $this->consumer);
     }
 
     public function testItImplementsDequeuerInterface()
     {
-        $this->assertInstanceOf('OldSound\RabbitMqBundle\RabbitMq\DequeuerInterface', $this->consumer);
+        $this->assertInstanceOf('WanupSml\RabbitMqBundle\RabbitMq\DequeuerInterface', $this->consumer);
     }
 
     public function testItsIdleTimeoutIsMutable()

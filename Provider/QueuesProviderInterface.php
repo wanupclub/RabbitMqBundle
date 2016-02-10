@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Provider;
+namespace WanupSml\RabbitMqBundle\Provider;
 
 /**
  * Queues provider interface
