@@ -1,7 +1,6 @@
 # RabbitMqBundle #
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/4f861efe-3e72-4d9e-9d31-52f2818d6e88/mini.png)](https://insight.sensiolabs.com/projects/4f861efe-3e72-4d9e-9d31-52f2818d6e88)
 [![Build Status][ico-travis]][link-travis]
 
