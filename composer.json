@@ -1,5 +1,6 @@
 {
     "name": "wanupsml/rabbitmq-bundle",
+    "version": "1.1.160701",
     "description": "Integrates php-amqplib with Symfony2 and RabbitMq",
     "keywords": ["symfony2", "rabbitmq", "message", "queue", "amqp"],
     "type": "symfony-bundle",
