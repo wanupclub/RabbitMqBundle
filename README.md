@@ -1,8 +1,9 @@
-# Looking for New Maintainer #
-
-See issue: https://github.com/videlalvaro/RabbitMqBundle/issues/327
-
 # RabbitMqBundle #
+
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/4f861efe-3e72-4d9e-9d31-52f2818d6e88/mini.png)](https://insight.sensiolabs.com/projects/4f861efe-3e72-4d9e-9d31-52f2818d6e88)
+[![Build Status][ico-travis]][link-travis]
 
 ## About ##
 
@@ -677,3 +678,11 @@ See: resources/meta/LICENSE.md
 ## Credits ##
 
 The bundle structure and the documentation is partially based on the [RedisBundle](http://github.com/Seldaek/RedisBundle)
+
+[ico-version]: https://img.shields.io/packagist/v/wanupsml/rabbitmq-bundle.svg?style=flat-square
+[ico-license]: https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/wanupsml/RabbitMqBundle/master.svg?style=flat-square
+[
+[link-packagist]: https://packagist.org/packages/wanupsml/rabbitmq-bundle
+[link-travis]: https://travis-ci.org/wanupsml/RabbitMqBundle
+[

@@ -19,17 +19,17 @@ abstract class BaseConsumerCommand extends BaseRabbitMqCommand
 
     public function stopConsumer()
     {
-        if ($this->consumer instanceof Consumer) {
-            // Process current message, then halt consumer
-            $this->consumer->forceStopConsumer();
-
-            // Halt consumer if waiting for a new message from the queue
-            try {
-                $this->consumer->stopConsuming();
-            } catch (AMQPTimeoutException $e) {}
-        } else {
-            exit();
+        if (!($this->consumer instanceof Consumer)) {
+            throw new \Exception("Consumer MUST be a BaseConsumer instance");
         }
+
+        // Process current message, then halt consumer
+        $this->consumer->forceStopConsumer();
+
+        // Halt consumer if waiting for a new message from the queue
+        try {
+            $this->consumer->stopConsuming();
+        } catch (AMQPTimeoutException $e) {}
     }
 
     public function restartConsumer()
