@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Command;
+namespace WanupSml\RabbitMqBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -26,9 +26,9 @@ class SetupFabricCommand extends BaseRabbitMqCommand
 
         $output->writeln('Setting up the Rabbit MQ fabric');
 
-        $partsHolder = $this->getContainer()->get('old_sound_rabbit_mq.parts_holder');
+        $partsHolder = $this->getContainer()->get('wanup_sml_rabbit_mq.parts_holder');
 
-        foreach ($partsHolder->getParts('old_sound_rabbit_mq.base_amqp') as $baseAmqp) {
+        foreach ($partsHolder->getParts('wanup_sml_rabbit_mq.base_amqp') as $baseAmqp) {
             $baseAmqp->setupFabric();
         }
     }

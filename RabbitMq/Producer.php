@@ -1,8 +1,8 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\RabbitMq;
+namespace WanupSml\RabbitMqBundle\RabbitMq;
 
-use OldSound\RabbitMqBundle\RabbitMq\BaseAmqp;
+use WanupSml\RabbitMqBundle\RabbitMq\BaseAmqp;
 use PhpAmqpLib\Message\AMQPMessage;
 
 /**

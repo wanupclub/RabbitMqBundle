@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Tests\Command;
+namespace WanupSml\RabbitMqBundle\Tests\Command;
 
 abstract class BaseCommandTest extends \PHPUnit_Framework_TestCase
 {

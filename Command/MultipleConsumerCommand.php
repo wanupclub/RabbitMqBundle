@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Command;
+namespace WanupSml\RabbitMqBundle\Command;
 
 class MultipleConsumerCommand extends BaseConsumerCommand
 {
@@ -15,6 +15,6 @@ class MultipleConsumerCommand extends BaseConsumerCommand
 
     protected function getConsumerService()
     {
-        return 'old_sound_rabbit_mq.%s_multiple';
+        return 'wanup_sml_rabbit_mq.%s_multiple';
     }
 }

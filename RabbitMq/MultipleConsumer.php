@@ -1,9 +1,9 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\RabbitMq;
+namespace WanupSml\RabbitMqBundle\RabbitMq;
 
-use OldSound\RabbitMqBundle\Provider\QueuesProviderInterface;
-use OldSound\RabbitMqBundle\RabbitMq\Exception\QueueNotFoundException;
+use WanupSml\RabbitMqBundle\Provider\QueuesProviderInterface;
+use WanupSml\RabbitMqBundle\RabbitMq\Exception\QueueNotFoundException;
 use PhpAmqpLib\Message\AMQPMessage;
 
 class MultipleConsumer extends Consumer

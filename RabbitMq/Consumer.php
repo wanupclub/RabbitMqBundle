@@ -1,8 +1,8 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\RabbitMq;
+namespace WanupSml\RabbitMqBundle\RabbitMq;
 
-use OldSound\RabbitMqBundle\RabbitMq\BaseConsumer;
+use WanupSml\RabbitMqBundle\RabbitMq\BaseConsumer;
 use PhpAmqpLib\Message\AMQPMessage;
 
 class Consumer extends BaseConsumer

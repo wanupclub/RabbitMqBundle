@@ -1,8 +1,8 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\RabbitMq;
+namespace WanupSml\RabbitMqBundle\RabbitMq;
 
-use OldSound\RabbitMqBundle\Provider\QueueOptionsProviderInterface;
+use WanupSml\RabbitMqBundle\Provider\QueueOptionsProviderInterface;
 
 class DynamicConsumer extends Consumer{
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\DependencyInjection;
+namespace WanupSml\RabbitMqBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
@@ -12,12 +12,12 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 
 /**
- * OldSoundRabbitMqExtension.
+ * WanupSmlRabbitMqExtension.
  *
  * @author Alvaro Videla
  * @author Marc Weistroff <marc.weistroff@sensio.com>
  */
-class OldSoundRabbitMqExtension extends Extension
+class WanupSmlRabbitMqExtension extends Extension
 {
     /**
      * @var ContainerBuilder
@@ -60,10 +60,10 @@ class OldSoundRabbitMqExtension extends Extension
                 $channels[] = new Reference($id);
             }
 
-            $definition = $container->getDefinition('old_sound_rabbit_mq.data_collector');
+            $definition = $container->getDefinition('wanup_sml_rabbit_mq.data_collector');
             $definition->replaceArgument(0, $channels);
         } else {
-            $this->container->removeDefinition('old_sound_rabbit_mq.data_collector');
+            $this->container->removeDefinition('wanup_sml_rabbit_mq.data_collector');
         }
     }
 
@@ -72,14 +72,14 @@ class OldSoundRabbitMqExtension extends Extension
         foreach ($this->config['connections'] as $key => $connection) {
             $classParam =
                 $connection['lazy']
-                    ? '%old_sound_rabbit_mq.lazy.connection.class%'
-                    : '%old_sound_rabbit_mq.connection.class%';
+                    ? '%wanup_sml_rabbit_mq.lazy.connection.class%'
+                    : '%wanup_sml_rabbit_mq.connection.class%';
 
-            $definition = new Definition('%old_sound_rabbit_mq.connection_factory.class%', array(
+            $definition = new Definition('%wanup_sml_rabbit_mq.connection_factory.class%', array(
                 $classParam, $connection,
             ));
             $definition->setPublic(false);
-            $factoryName = sprintf('old_sound_rabbit_mq.connection_factory.%s', $key);
+            $factoryName = sprintf('wanup_sml_rabbit_mq.connection_factory.%s', $key);
             $this->container->setDefinition($factoryName, $definition);
 
             $definition = new Definition($classParam);
@@ -92,7 +92,7 @@ class OldSoundRabbitMqExtension extends Extension
                 $definition->setFactoryMethod('createConnection');
             }
 
-            $this->container->setDefinition(sprintf('old_sound_rabbit_mq.connection.%s', $key), $definition);
+            $this->container->setDefinition(sprintf('wanup_sml_rabbit_mq.connection.%s', $key), $definition);
         }
     }
 
@@ -101,8 +101,8 @@ class OldSoundRabbitMqExtension extends Extension
         if ($this->config['sandbox'] == false) {
             foreach ($this->config['producers'] as $key => $producer) {
                 $definition = new Definition($producer['class']);
-                $definition->addTag('old_sound_rabbit_mq.base_amqp');
-                $definition->addTag('old_sound_rabbit_mq.producer');
+                $definition->addTag('wanup_sml_rabbit_mq.base_amqp');
+                $definition->addTag('wanup_sml_rabbit_mq.producer');
                 //this producer doesn't define an exchange -> using AMQP Default
                 if (!isset($producer['exchange_options'])) {
                     $producer['exchange_options']['name'] = '';
@@ -124,12 +124,12 @@ class OldSoundRabbitMqExtension extends Extension
                     $definition->addMethodCall('disableAutoSetupFabric');
                 }
 
-                $this->container->setDefinition(sprintf('old_sound_rabbit_mq.%s_producer', $key), $definition);
+                $this->container->setDefinition(sprintf('wanup_sml_rabbit_mq.%s_producer', $key), $definition);
             }
         } else {
             foreach ($this->config['producers'] as $key => $producer) {
-                $definition = new Definition('%old_sound_rabbit_mq.fallback.class%');
-                $this->container->setDefinition(sprintf('old_sound_rabbit_mq.%s_producer', $key), $definition);
+                $definition = new Definition('%wanup_sml_rabbit_mq.fallback.class%');
+                $this->container->setDefinition(sprintf('wanup_sml_rabbit_mq.%s_producer', $key), $definition);
             }
         }
     }
@@ -137,10 +137,10 @@ class OldSoundRabbitMqExtension extends Extension
     protected function loadConsumers()
     {
         foreach ($this->config['consumers'] as $key => $consumer) {
-            $definition = new Definition('%old_sound_rabbit_mq.consumer.class%');
+            $definition = new Definition('%wanup_sml_rabbit_mq.consumer.class%');
             $definition
-                ->addTag('old_sound_rabbit_mq.base_amqp')
-                ->addTag('old_sound_rabbit_mq.consumer')
+                ->addTag('wanup_sml_rabbit_mq.base_amqp')
+                ->addTag('wanup_sml_rabbit_mq.consumer')
                 ->addMethodCall('setExchangeOptions', array($this->normalizeArgumentKeys($consumer['exchange_options'])))
                 ->addMethodCall('setQueueOptions', array($this->normalizeArgumentKeys($consumer['queue_options'])))
                 ->addMethodCall('setCallback', array(array(new Reference($consumer['callback']), 'execute')));
@@ -165,7 +165,7 @@ class OldSoundRabbitMqExtension extends Extension
                 $this->injectLoggedChannel($definition, $key, $consumer['connection']);
             }
 
-            $name = sprintf('old_sound_rabbit_mq.%s_consumer', $key);
+            $name = sprintf('wanup_sml_rabbit_mq.%s_consumer', $key);
             $this->container->setDefinition($name, $definition);
             $this->addDequeuerAwareCall($consumer['callback'], $name);
         }
@@ -190,10 +190,10 @@ class OldSoundRabbitMqExtension extends Extension
                 $callbacks[] = new Reference($queueOptions['callback']);
             }
 
-            $definition = new Definition('%old_sound_rabbit_mq.multi_consumer.class%');
+            $definition = new Definition('%wanup_sml_rabbit_mq.multi_consumer.class%');
             $definition
-                ->addTag('old_sound_rabbit_mq.base_amqp')
-                ->addTag('old_sound_rabbit_mq.multi_consumer')
+                ->addTag('wanup_sml_rabbit_mq.base_amqp')
+                ->addTag('wanup_sml_rabbit_mq.multi_consumer')
                 ->addMethodCall('setExchangeOptions', array($this->normalizeArgumentKeys($consumer['exchange_options'])))
                 ->addMethodCall('setQueues', array($this->normalizeArgumentKeys($queues)));
 
@@ -224,7 +224,7 @@ class OldSoundRabbitMqExtension extends Extension
                 $this->injectLoggedChannel($definition, $key, $consumer['connection']);
             }
 
-            $name = sprintf('old_sound_rabbit_mq.%s_multiple', $key);
+            $name = sprintf('wanup_sml_rabbit_mq.%s_multiple', $key);
             $this->container->setDefinition($name, $definition);
             if ($consumer['queues_provider']) {
                 $this->addDequeuerAwareCall($consumer['queues_provider'], $name);
@@ -246,11 +246,11 @@ class OldSoundRabbitMqExtension extends Extension
                 );
             }
             
-            $definition = new Definition('%old_sound_rabbit_mq.dynamic_consumer.class%');
+            $definition = new Definition('%wanup_sml_rabbit_mq.dynamic_consumer.class%');
             $definition
-                ->addTag('old_sound_rabbit_mq.base_amqp')
-                ->addTag('old_sound_rabbit_mq.consumer')
-                ->addTag('old_sound_rabbit_mq.dynamic_consumer')
+                ->addTag('wanup_sml_rabbit_mq.base_amqp')
+                ->addTag('wanup_sml_rabbit_mq.consumer')
+                ->addTag('wanup_sml_rabbit_mq.dynamic_consumer')
                 ->addMethodCall('setExchangeOptions', array($this->normalizeArgumentKeys($consumer['exchange_options'])))
                 ->addMethodCall('setCallback', array(array(new Reference($consumer['callback']), 'execute')));
 
@@ -279,7 +279,7 @@ class OldSoundRabbitMqExtension extends Extension
                 $this->injectLoggedChannel($definition, $key, $consumer['connection']);
             }
 
-            $name = sprintf('old_sound_rabbit_mq.%s_dynamic', $key);
+            $name = sprintf('wanup_sml_rabbit_mq.%s_dynamic', $key);
             $this->container->setDefinition($name, $definition);
             $this->addDequeuerAwareCall($consumer['callback'], $name);
             $this->addDequeuerAwareCall($consumer['queue_options_provider'], $name);
@@ -289,10 +289,10 @@ class OldSoundRabbitMqExtension extends Extension
     protected function loadAnonConsumers()
     {
         foreach ($this->config['anon_consumers'] as $key => $anon) {
-            $definition = new Definition('%old_sound_rabbit_mq.anon_consumer.class%');
+            $definition = new Definition('%wanup_sml_rabbit_mq.anon_consumer.class%');
             $definition
-                ->addTag('old_sound_rabbit_mq.base_amqp')
-                ->addTag('old_sound_rabbit_mq.anon_consumer')
+                ->addTag('wanup_sml_rabbit_mq.base_amqp')
+                ->addTag('wanup_sml_rabbit_mq.anon_consumer')
                 ->addMethodCall('setExchangeOptions', array($this->normalizeArgumentKeys($anon['exchange_options'])))
                 ->addMethodCall('setCallback', array(array(new Reference($anon['callback']), 'execute')));
             $this->injectConnection($definition, $anon['connection']);
@@ -300,7 +300,7 @@ class OldSoundRabbitMqExtension extends Extension
                 $this->injectLoggedChannel($definition, $key, $anon['connection']);
             }
 
-            $name = sprintf('old_sound_rabbit_mq.%s_anon', $key);
+            $name = sprintf('wanup_sml_rabbit_mq.%s_anon', $key);
             $this->container->setDefinition($name, $definition);
             $this->addDequeuerAwareCall($anon['callback'], $name);
         }
@@ -362,9 +362,9 @@ class OldSoundRabbitMqExtension extends Extension
     protected function loadRpcClients()
     {
         foreach ($this->config['rpc_clients'] as $key => $client) {
-            $definition = new Definition('%old_sound_rabbit_mq.rpc_client.class%');
+            $definition = new Definition('%wanup_sml_rabbit_mq.rpc_client.class%');
             $definition
-                ->addTag('old_sound_rabbit_mq.rpc_client')
+                ->addTag('wanup_sml_rabbit_mq.rpc_client')
                 ->addMethodCall('initClient', array($client['expect_serialized_response']));
             $this->injectConnection($definition, $client['connection']);
             if ($this->collectorEnabled) {
@@ -374,17 +374,17 @@ class OldSoundRabbitMqExtension extends Extension
                 $definition->addMethodCall('setUnserializer', array($client['unserializer']));
             }
 
-            $this->container->setDefinition(sprintf('old_sound_rabbit_mq.%s_rpc', $key), $definition);
+            $this->container->setDefinition(sprintf('wanup_sml_rabbit_mq.%s_rpc', $key), $definition);
         }
     }
 
     protected function loadRpcServers()
     {
         foreach ($this->config['rpc_servers'] as $key => $server) {
-            $definition = new Definition('%old_sound_rabbit_mq.rpc_server.class%');
+            $definition = new Definition('%wanup_sml_rabbit_mq.rpc_server.class%');
             $definition
-                ->addTag('old_sound_rabbit_mq.base_amqp')
-                ->addTag('old_sound_rabbit_mq.rpc_server')
+                ->addTag('wanup_sml_rabbit_mq.base_amqp')
+                ->addTag('wanup_sml_rabbit_mq.rpc_server')
                 ->addMethodCall('initServer', array($key))
                 ->addMethodCall('setCallback', array(array(new Reference($server['callback']), 'execute')));
             $this->injectConnection($definition, $server['connection']);
@@ -407,17 +407,17 @@ class OldSoundRabbitMqExtension extends Extension
             if (array_key_exists('serializer', $server)) {
                 $definition->addMethodCall('setSerializer', array($server['serializer']));
             }
-            $this->container->setDefinition(sprintf('old_sound_rabbit_mq.%s_server', $key), $definition);
+            $this->container->setDefinition(sprintf('wanup_sml_rabbit_mq.%s_server', $key), $definition);
         }
     }
 
     protected function injectLoggedChannel(Definition $definition, $name, $connectionName)
     {
-        $id      = sprintf('old_sound_rabbit_mq.channel.%s', $name);
-        $channel = new Definition('%old_sound_rabbit_mq.logged.channel.class%');
+        $id      = sprintf('wanup_sml_rabbit_mq.channel.%s', $name);
+        $channel = new Definition('%wanup_sml_rabbit_mq.logged.channel.class%');
         $channel
             ->setPublic(false)
-            ->addTag('old_sound_rabbit_mq.logged_channel');
+            ->addTag('wanup_sml_rabbit_mq.logged_channel');
         $this->injectConnection($channel, $connectionName);
 
         $this->container->setDefinition($id, $channel);
@@ -428,12 +428,12 @@ class OldSoundRabbitMqExtension extends Extension
 
     protected function injectConnection(Definition $definition, $connectionName)
     {
-        $definition->addArgument(new Reference(sprintf('old_sound_rabbit_mq.connection.%s', $connectionName)));
+        $definition->addArgument(new Reference(sprintf('wanup_sml_rabbit_mq.connection.%s', $connectionName)));
     }
 
     public function getAlias()
     {
-        return 'old_sound_rabbit_mq';
+        return 'wanup_sml_rabbit_mq';
     }
 
     /**
@@ -450,7 +450,7 @@ class OldSoundRabbitMqExtension extends Extension
 
         $callbackDefinition = $this->container->findDefinition($callback);
         $refClass           = new \ReflectionClass($callbackDefinition->getClass());
-        if ($refClass->implementsInterface('OldSound\RabbitMqBundle\RabbitMq\DequeuerAwareInterface')) {
+        if ($refClass->implementsInterface('WanupSml\RabbitMqBundle\RabbitMq\DequeuerAwareInterface')) {
             $callbackDefinition->addMethodCall('setDequeuer', array(new Reference($name)));
         }
     }

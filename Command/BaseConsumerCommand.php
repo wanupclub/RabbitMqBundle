@@ -1,8 +1,8 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Command;
+namespace WanupSml\RabbitMqBundle\Command;
 
-use OldSound\RabbitMqBundle\RabbitMq\BaseConsumer as Consumer;
+use WanupSml\RabbitMqBundle\RabbitMq\BaseConsumer as Consumer;
 use PhpAmqpLib\Exception\AMQPTimeoutException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

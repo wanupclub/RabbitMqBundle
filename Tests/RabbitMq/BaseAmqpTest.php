@@ -1,8 +1,8 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Tests\RabbitMq;
+namespace WanupSml\RabbitMqBundle\Tests\RabbitMq;
 
-use OldSound\RabbitMqBundle\RabbitMq\Consumer;
+use WanupSml\RabbitMqBundle\RabbitMq\Consumer;
 use PhpAmqpLib\Connection\AMQPLazyConnection;
 
 class BaseAmqpTest extends \PHPUnit_Framework_TestCase

@@ -12,7 +12,7 @@
         bootstrap                   = "Tests/bootstrap.php">
 
     <testsuites>
-        <testsuite name="OldSoundRabbitMqBundle Test Suite">
+        <testsuite name="WanupSmlRabbitMqBundle Test Suite">
             <directory>Tests</directory>
         </testsuite>
     </testsuites>

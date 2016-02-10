@@ -1,8 +1,8 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Tests\RabbitMq;
+namespace WanupSml\RabbitMqBundle\Tests\RabbitMq;
 
-use OldSound\RabbitMqBundle\RabbitMq\RpcServer;
+use WanupSml\RabbitMqBundle\RabbitMq\RpcServer;
 use PhpAmqpLib\Message\AMQPMessage;
 
 class RpcServerTest extends \PHPUnit_Framework_TestCase
@@ -10,7 +10,7 @@ class RpcServerTest extends \PHPUnit_Framework_TestCase
     public function testProcessMessageWithCustomSerializer()
     {
         /** @var RpcServer $server */
-        $server = $this->getMockBuilder('\OldSound\RabbitMqBundle\RabbitMq\RpcServer')
+        $server = $this->getMockBuilder('\WanupSml\RabbitMqBundle\RabbitMq\RpcServer')
             ->setMethods(array('sendReply', 'maybeStopConsumer'))
             ->disableOriginalConstructor()
             ->getMock();

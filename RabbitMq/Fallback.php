@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\RabbitMq;
+namespace WanupSml\RabbitMqBundle\RabbitMq;
 
 class Fallback implements ProducerInterface
 {

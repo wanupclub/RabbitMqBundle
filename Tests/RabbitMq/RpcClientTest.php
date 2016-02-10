@@ -1,15 +1,15 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Tests\RabbitMq;
+namespace WanupSml\RabbitMqBundle\Tests\RabbitMq;
 
-use OldSound\RabbitMqBundle\RabbitMq\RpcClient;
+use WanupSml\RabbitMqBundle\RabbitMq\RpcClient;
 
 class RpcClientTest extends \PHPUnit_Framework_TestCase
 {
     public function testProcessMessageWithCustomUnserializer()
     {
         /** @var RpcClient $client */
-        $client = $this->getMockBuilder('\OldSound\RabbitMqBundle\RabbitMq\RpcClient')
+        $client = $this->getMockBuilder('\WanupSml\RabbitMqBundle\RabbitMq\RpcClient')
             ->setMethods(array('sendReply', 'maybeStopConsumer'))
             ->disableOriginalConstructor()
             ->getMock();

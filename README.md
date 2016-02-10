@@ -12,7 +12,7 @@ The bundle implements several messaging patterns as seen on the [Thumper](https:
 
 ```php
 $msg = array('user_id' => 1235, 'image_path' => '/path/to/new/pic.png');
-$this->get('old_sound_rabbit_mq.upload_picture_producer')->publish(serialize($msg));
+$this->get('wanup_sml_rabbit_mq.upload_picture_producer')->publish(serialize($msg));
 ```
 
 Later when you want to consume 50 messages out of the `upload_pictures` queue, you just run on the CLI:
@@ -23,7 +23,7 @@ $ ./app/console rabbitmq:consumer -m 50 upload_picture
 
 All the examples expect a running RabbitMQ server.
 
-This bundle was presented at [Symfony Live Paris 2011](http://www.symfony-live.com/paris/schedule#session-av1) conference. See the slides [here](http://www.slideshare.net/old_sound/theres-a-rabbit-on-my-symfony).
+This bundle was presented at [Symfony Live Paris 2011](http://www.symfony-live.com/paris/schedule#session-av1) conference. See the slides [here](http://www.slideshare.net/wanup_sml/theres-a-rabbit-on-my-symfony).
 
 [![Build Status](https://secure.travis-ci.org/videlalvaro/RabbitMqBundle.png?branch=master)](http://travis-ci.org/videlalvaro/RabbitMqBundle)
 
@@ -34,7 +34,7 @@ This bundle was presented at [Symfony Live Paris 2011](http://www.symfony-live.c
 Require the bundle and its dependencies with composer:
 
 ```bash
-$ composer require oldsound/rabbitmq-bundle
+$ composer require WanupSml/rabbitmq-bundle
 ```
 
 Register the bundle:
@@ -45,7 +45,7 @@ Register the bundle:
 public function registerBundles()
 {
     $bundles = array(
-        new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+        new WanupSml\RabbitMqBundle\WanupSmlRabbitMqBundle(),
     );
 }
 ```
@@ -62,7 +62,7 @@ Require the bundle in your composer.json file:
 ````
 {
     "require": {
-        "oldsound/rabbitmq-bundle": "~1.6",
+        "WanupSml/rabbitmq-bundle": "~1.6",
     }
 }
 ```
@@ -70,12 +70,12 @@ Require the bundle in your composer.json file:
 Register the extension and the compiler pass:
 
 ```php
-use OldSound\RabbitMqBundle\DependencyInjection\OldSoundRabbitMqExtension;
-use OldSound\RabbitMqBundle\DependencyInjection\Compiler\RegisterPartsPass;
+use WanupSml\RabbitMqBundle\DependencyInjection\WanupSmlRabbitMqExtension;
+use WanupSml\RabbitMqBundle\DependencyInjection\Compiler\RegisterPartsPass;
 
 // ...
 
-$containerBuilder->registerExtension(new OldSoundRabbitMqExtension());
+$containerBuilder->registerExtension(new WanupSmlRabbitMqExtension());
 $containerBuilder->addCompilerPass(new RegisterPartsPass());
 ```
 
@@ -94,10 +94,10 @@ $containerBuilder->addCompilerPass(new RegisterPartsPass());
 
 ## Usage ##
 
-Add the `old_sound_rabbit_mq` section in your configuration file:
+Add the `wanup_sml_rabbit_mq` section in your configuration file:
 
 ```yaml
-old_sound_rabbit_mq:
+wanup_sml_rabbit_mq:
     connections:
         default:
             host:     'localhost'
@@ -126,7 +126,7 @@ old_sound_rabbit_mq:
             callback:         upload_picture_service
 ```
 
-Here we configure the connection service and the message endpoints that our application will have. In this example your service container will contain the service `old_sound_rabbit_mq.upload_picture_producer` and `old_sound_rabbit_mq.upload_picture_consumer`. The later expects that there's a service called `upload_picture_service`.
+Here we configure the connection service and the message endpoints that our application will have. In this example your service container will contain the service `wanup_sml_rabbit_mq.upload_picture_producer` and `wanup_sml_rabbit_mq.upload_picture_consumer`. The later expects that there's a service called `upload_picture_service`.
 
 If you don't specify a connection for the client, the client will look for a connection with the same alias. So for our `upload_picture` the service container will look for an `upload_picture` connection.
 
@@ -190,22 +190,22 @@ Now let's say that you want to process picture uploads in the background. After 
 public function indexAction($name)
 {
     $msg = array('user_id' => 1235, 'image_path' => '/path/to/new/pic.png');
-    $this->get('old_sound_rabbit_mq.upload_picture_producer')->publish(serialize($msg));
+    $this->get('wanup_sml_rabbit_mq.upload_picture_producer')->publish(serialize($msg));
 }
 ```
 
-As you can see, if in your configuration you have a producer called __upload\_picture__, then in the service container you will have a service called __old_sound_rabbit_mq.upload\_picture\_producer__.
+As you can see, if in your configuration you have a producer called __upload\_picture__, then in the service container you will have a service called __wanup_sml_rabbit_mq.upload\_picture\_producer__.
 
-Besides the message itself, the `OldSound\RabbitMqBundle\RabbitMq\Producer#publish()` method also accepts an optional routing key parameter and an optional array of additional properties. The array of additional properties allows you to alter the properties with which an `PhpAmqpLib\Message\AMQPMessage` object gets constructed by default. This way, for example, you can change the application headers.
+Besides the message itself, the `WanupSml\RabbitMqBundle\RabbitMq\Producer#publish()` method also accepts an optional routing key parameter and an optional array of additional properties. The array of additional properties allows you to alter the properties with which an `PhpAmqpLib\Message\AMQPMessage` object gets constructed by default. This way, for example, you can change the application headers.
 
 You can use __setContentType__ and __setDeliveryMode__ methods in order to set the message content type and the message
 delivery mode respectively. Default values are __text/plain__ for content type and __2__ for delivery mode.
 
 ```php
-$this->get('old_sound_rabbit_mq.upload_picture_producer')->setContentType('application/json');
+$this->get('wanup_sml_rabbit_mq.upload_picture_producer')->setContentType('application/json');
 ```
 
-If you need to use a custom class for a producer (which should inherit from `OldSound\RabbitMqBundle\RabbitMq\Producer`), you can use the `class` option:
+If you need to use a custom class for a producer (which should inherit from `WanupSml\RabbitMqBundle\RabbitMq\Producer`), you can use the `class` option:
 
 ```yaml
     ...
@@ -325,7 +325,7 @@ Here's an example callback:
 
 namespace Acme\DemoBundle\Consumer;
 
-use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
+use WanupSml\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 
 class UploadPictureConsumer implements ConsumerInterface
@@ -386,7 +386,7 @@ rpc_servers:
         serializer: json_encode
 ```
 
-*For a full configuration reference please use the `php app/console config:dump-reference old_sound_rabbit_mq` command.*
+*For a full configuration reference please use the `php app/console config:dump-reference wanup_sml_rabbit_mq` command.*
 
 Here we have a very useful server: it returns random integers to its clients. The callback used to process the request will be the __random\_int\_server__ service. Now let's see how to invoke it from our controllers.
 
@@ -401,13 +401,13 @@ And then add the following code to our controller:
 ```php
 public function indexAction($name)
 {
-    $client = $this->get('old_sound_rabbit_mq.integer_store_rpc');
+    $client = $this->get('wanup_sml_rabbit_mq.integer_store_rpc');
     $client->addRequest(serialize(array('min' => 0, 'max' => 10)), 'random_int', 'request_id');
     $replies = $client->getReplies();
 }
 ```
 
-As you can see there, if our client id is __integer\_store__, then the service name will be __old_sound_rabbit_mq.integer\_store_rpc__. Once we get that object we place a request on the server by calling `addRequest` that expects three parameters:
+As you can see there, if our client id is __integer\_store__, then the service name will be __wanup_sml_rabbit_mq.integer\_store_rpc__. Once we get that object we place a request on the server by calling `addRequest` that expects three parameters:
 
 - The arguments to be sent to the remote procedure call.
 - The name of the RPC server, in our case __random\_int__.
@@ -432,7 +432,7 @@ You can also set a expiration for request in seconds, after which message will n
 public function indexAction($name)
 {
     $expiration = 5; // seconds
-    $client = $this->get('old_sound_rabbit_mq.integer_store_rpc');
+    $client = $this->get('wanup_sml_rabbit_mq.integer_store_rpc');
     $client->addRequest($body, $server, $requestId, $routingKey, $expiration);
     try {
         $replies = $client->getReplies();
@@ -467,7 +467,7 @@ Then this code should go in our controller:
 ```php
 public function indexAction($name)
 {
-    $client = $this->get('old_sound_rabbit_mq.parallel_rpc');
+    $client = $this->get('wanup_sml_rabbit_mq.parallel_rpc');
     $client->addRequest($name, 'char_count', 'char_count');
     $client->addRequest(serialize(array('min' => 0, 'max' => 10)), 'random_int', 'random_int');
     $replies = $client->getReplies();

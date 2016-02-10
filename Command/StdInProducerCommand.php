@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Command;
+namespace WanupSml\RabbitMqBundle\Command;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -38,7 +38,7 @@ class StdInProducerCommand extends BaseRabbitMqCommand
     {
         define('AMQP_DEBUG', (bool) $input->getOption('debug'));
 
-        $producer = $this->getContainer()->get(sprintf('old_sound_rabbit_mq.%s_producer', $input->getArgument('name')));
+        $producer = $this->getContainer()->get(sprintf('wanup_sml_rabbit_mq.%s_producer', $input->getArgument('name')));
 
         $data = '';
         while (!feof(STDIN)) {

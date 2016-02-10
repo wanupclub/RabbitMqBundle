@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Command;
+namespace WanupSml\RabbitMqBundle\Command;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -43,7 +43,7 @@ class RpcServerCommand extends BaseRabbitMqCommand
         }
 
         $this->getContainer()
-               ->get(sprintf('old_sound_rabbit_mq.%s_server', $input->getArgument('name')))
+               ->get(sprintf('wanup_sml_rabbit_mq.%s_server', $input->getArgument('name')))
                ->start($amount);
     }
 }

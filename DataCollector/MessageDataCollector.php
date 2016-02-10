@@ -1,6 +1,6 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\DataCollector;
+namespace WanupSml\RabbitMqBundle\DataCollector;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;

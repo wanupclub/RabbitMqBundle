@@ -1,8 +1,8 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Tests\Command;
+namespace WanupSml\RabbitMqBundle\Tests\Command;
 
-use OldSound\RabbitMqBundle\Command\ConsumerCommand;
+use WanupSml\RabbitMqBundle\Command\ConsumerCommand;
 
 use Symfony\Component\Console\Input\InputOption;
 

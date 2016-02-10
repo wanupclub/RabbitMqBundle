@@ -1,10 +1,10 @@
 <?php
 
-namespace OldSound\RabbitMqBundle\Tests\RabbitMq;
+namespace WanupSml\RabbitMqBundle\Tests\RabbitMq;
 
-use OldSound\RabbitMqBundle\Provider\QueuesProviderInterface;
-use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
-use OldSound\RabbitMqBundle\RabbitMq\MultipleConsumer;
+use WanupSml\RabbitMqBundle\Provider\QueuesProviderInterface;
+use WanupSml\RabbitMqBundle\RabbitMq\ConsumerInterface;
+use WanupSml\RabbitMqBundle\RabbitMq\MultipleConsumer;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AMQPConnection;
 use PhpAmqpLib\Message\AMQPMessage;
@@ -205,7 +205,7 @@ class MultipleConsumerTest extends \PHPUnit_Framework_TestCase
      */
     private function prepareQueuesProvider()
     {
-        return $this->getMockBuilder('\OldSound\RabbitMqBundle\Provider\QueuesProviderInterface')
+        return $this->getMockBuilder('\WanupSml\RabbitMqBundle\Provider\QueuesProviderInterface')
             ->getMock();
     }
 
