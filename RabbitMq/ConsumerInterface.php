@@ -17,6 +17,11 @@ interface ConsumerInterface
     const MSG_SINGLE_NACK_REQUEUE = 2;
 
     /**
+     * Flag for unacknowledged message
+     */
+    const MSG_UNACKED = 999;
+
+    /**
      * Flag for reject and requeue
      */
     const MSG_REJECT_REQUEUE = 0;

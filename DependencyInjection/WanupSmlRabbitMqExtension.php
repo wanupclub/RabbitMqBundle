@@ -98,7 +98,7 @@ class WanupSmlRabbitMqExtension extends Extension
 
     protected function loadProducers()
     {
-        if ($this->config['sandbox'] == false) {
+        if ($this->config['sandbox'] === false) {
             foreach ($this->config['producers'] as $key => $producer) {
                 $definition = new Definition($producer['class']);
                 $definition->addTag('wanup_sml_rabbit_mq.base_amqp');
@@ -184,7 +184,7 @@ class WanupSmlRabbitMqExtension extends Extension
                 );
             }
 
-            foreach ($consumer['queues'] as $queueName => $queueOptions) {
+            foreach ($consumer['queues'] as $queueOptions) {
                 $queues[$queueOptions['name']]  = $queueOptions;
                 $queues[$queueOptions['name']]['callback'] = array(new Reference($queueOptions['callback']), 'execute');
                 $callbacks[] = new Reference($queueOptions['callback']);
