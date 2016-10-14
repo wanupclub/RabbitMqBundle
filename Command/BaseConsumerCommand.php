@@ -30,6 +30,13 @@ abstract class BaseConsumerCommand extends BaseRabbitMqCommand
         try {
             $this->consumer->stopConsuming();
         } catch (AMQPTimeoutException $e) {}
+        finally {
+            /*
+             * After end consumer link with basic_cancel,
+             * stop script even if we don't handle signals.
+             */
+            die();
+        }
     }
 
     public function restartConsumer()
